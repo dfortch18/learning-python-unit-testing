@@ -5,7 +5,7 @@ import os
 from dfm18.bank_account._simple import SimpleBankAccount
 
 
-class TestBankAccount(unittest.TestCase):
+class TestSimpleBankAccount(unittest.TestCase):
     def setUp(self):
         self.account = SimpleBankAccount(balance=1000, log_file="transaction.log")
 
