@@ -2,12 +2,12 @@ import unittest
 
 import os
 
-from dfm18.bank_account import BankAccount
+from dfm18.bank_account._simple import SimpleBankAccount
 
 
 class TestBankAccount(unittest.TestCase):
     def setUp(self):
-        self.account = BankAccount(balance=1000, log_file="transaction.log")
+        self.account = SimpleBankAccount(balance=1000, log_file="transaction.log")
 
     def tearDown(self):
         for handler in self.account._logger.handlers:

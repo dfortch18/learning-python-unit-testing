@@ -1,9 +1,11 @@
 from typing import Optional
 
+from ._base import BankAccount
+
 import logging
 
 
-class BankAccount:
+class SimpleBankAccount(BankAccount):
     def __init__(self, balance: float = 0, log_file: Optional[str] = None):
         self._balance = balance
         self.log_file = log_file
