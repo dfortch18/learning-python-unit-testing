@@ -30,13 +30,17 @@ class SimpleBankAccount(BankAccount):
         if amount > 0:
             self._balance += amount
             self._logger.info("Deposited %.2f. New balance: %.2f", amount, self.balance)
-        return self._balance
+            return self._balance
+        else:
+            raise ValueError("Amount must be greater than zero")
 
     def withdraw(self, amount: float) -> float:
         if amount > 0:
             self._balance -= amount
             self._logger.info("Withdrew %.2f. New balance: %.2f", amount, self.balance)
-        return self._balance
+            return self._balance
+        else:
+            raise ValueError("Amount must be greater than zero")
 
     @property
     def balance(self) -> float:

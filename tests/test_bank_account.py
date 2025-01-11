@@ -19,10 +19,26 @@ class TestBankAccount(unittest.TestCase):
     def test_deposit(self):
         new_balance = self.account.deposit(500)
         self.assertEqual(new_balance, 1500)
+    
+    def test_deposit_on_negative_amount_raises_exception(self):
+        with self.assertRaises(ValueError):
+            self.account.deposit(-100)
+
+    def test_deposit_on_zero_amount_raises_exception(self):
+        with self.assertRaises(ValueError):
+            self.account.deposit(0)
 
     def test_withdraw(self):
         new_balance = self.account.withdraw(200)
         self.assertEqual(new_balance, 800)
+    
+    def test_withdraw_on_negative_amount_raises_exception(self):
+        with self.assertRaises(ValueError):
+            self.account.withdraw(-100)
+
+    def test_withdraw_on_zero_amount_raises_exception(self):
+        with self.assertRaises(ValueError):
+            self.account.withdraw(0)
 
     def test_balance_property(self):
         self.assertEqual(self.account.balance, 1000)
