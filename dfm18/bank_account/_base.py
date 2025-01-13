@@ -1,38 +1,52 @@
 from typing import Protocol, runtime_checkable
 
+from abc import abstractmethod
+
 
 @runtime_checkable
 class BankAccount(Protocol):
+    @abstractmethod
     def deposit(self, amount: float) -> float:
         """
-        Deposit an amount into the account and returns the new balance.
+        Deposits a specified amount into the account and returns the updated balance.
 
         Args:
-            amount (float): The amount to deposit
+            amount (float): The amount to deposit. Must be greater than zero.
 
         Returns:
-            float: The new balance
+            float: The updated account balance.
         """
         ...
 
+    @abstractmethod
     def withdraw(self, amount: float) -> float:
         """
-        Withdraw an amount from the account and return the new balance.
+        Withdraws a specified amount from the account and returns the updated balance.
 
         Args:
-            amount (float): The amount to withdraw.
+            amount (float): The amount to withdraw. Must be greater than zero.
 
         Returns:
-            float: The new balance.
+            float: The updated account balance.
+        """
+        ...
+
+    @abstractmethod
+    def get_balance(self) -> float:
+        """
+        Retrieves the current account balance.
+
+        Returns:
+            float: The current account balance.
         """
         ...
 
     @property
     def balance(self) -> float:
         """
-        Retrieve the current balance of the account.
+        Retrieves the current balance of the account.
 
         Returns:
             float: The current balance.
         """
-        ...
+        return self.get_balance()

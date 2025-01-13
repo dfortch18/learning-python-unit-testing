@@ -15,7 +15,7 @@ class SimpleBankAccount(BankAccount):
         policies: Optional[List[Policy]] = None,
     ):
         """
-        Simple Bank Account.
+        Initializes a simple bank account with an optional initial balance, logging, and policies.
 
         Args:
             balance (float, optional): Initial account balance. Defaults to 0.
@@ -59,20 +59,18 @@ class SimpleBankAccount(BankAccount):
 
     def deposit(self, amount: float) -> float:
         """
-        Deposit an amount into the account and return the new balance.
+        Deposits a specified amount into the account and returns the updated balance.
 
         Args:
-            amount (float): The amount to deposit.
+            amount (float): The amount to deposit. Must be greater than zero.
 
         Returns:
-            float: The updated balance.
+            float: The updated account balance.
 
         Example:
             >>> account = SimpleBankAccount()
             >>> account.deposit(50)
             50
-            >>> account.deposit(25)
-            75
         """
         if amount <= 0:
             raise ValueError("Amount must be greater than zero")
@@ -85,13 +83,13 @@ class SimpleBankAccount(BankAccount):
 
     def withdraw(self, amount: float) -> float:
         """
-        Withdraw an amount from the account and return the new balance.
+        Withdraws a specified amount from the account and returns the updated balance.
 
         Args:
-            amount (float): The amount to withdraw.
+            amount (float): The amount to withdraw. Must be greater than zero.
 
         Returns:
-            float: The updated balance.
+            float: The updated account balance.
 
         Example:
             >>> account = SimpleBankAccount(balance=100)
@@ -109,13 +107,12 @@ class SimpleBankAccount(BankAccount):
         self._logger.info("Withdrew %.2f. New balance: %.2f", amount, self.balance)
         return self._balance
 
-    @property
-    def balance(self) -> float:
+    def get_balance(self) -> float:
         """
-        Retrieve the current balance of the account.
+        Retrieves the current account balance.
 
         Returns:
-            float: The current balance.
+            float: The current account balance.
 
         Example:
             >>> account = SimpleBankAccount(balance=200)
