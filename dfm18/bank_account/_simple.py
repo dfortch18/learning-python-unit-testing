@@ -14,12 +14,30 @@ class SimpleBankAccount(BankAccount):
         log_file: Optional[str] = None,
         policies: Optional[List[Policy]] = None,
     ):
+        """
+        Simple Bank Account.
+
+        Args:
+            balance (float, optional): Initial account balance. Defaults to 0.
+            log_file (Optional[str], optional): Optional log file for logging transactions. Defaults to None.
+            policies (Optional[List[Policy]], optional): List of policies to enforce on operations. Defaults to None.
+
+        Example:
+            >>> account = SimpleBankAccount(balance=100)
+            >>> account.balance
+            100
+            >>> account.deposit(50)
+            150
+            >>> account.withdraw(30)
+            120
+        """
         self._balance = balance
         self.log_file = log_file
         self.policies = policies or []
         self._setup_logger()
 
     def _setup_logger(self):
+
         self._logger = logging.getLogger(__name__)
         self._logger.setLevel(logging.INFO)
 
@@ -40,9 +58,25 @@ class SimpleBankAccount(BankAccount):
                 policy.apply(self, amount)
 
     def deposit(self, amount: float) -> float:
+        """
+        Deposit an amount into the account and return the new balance.
+
+        Args:
+            amount (float): The amount to deposit.
+
+        Returns:
+            float: The updated balance.
+
+        Example:
+            >>> account = SimpleBankAccount()
+            >>> account.deposit(50)
+            50
+            >>> account.deposit(25)
+            75
+        """
         if amount <= 0:
             raise ValueError("Amount must be greater than zero")
-        
+
         self._apply_policies(amount, PolicyOperation.DEPOSIT)
 
         self._balance += amount
@@ -50,6 +84,22 @@ class SimpleBankAccount(BankAccount):
         return self._balance
 
     def withdraw(self, amount: float) -> float:
+        """
+        Withdraw an amount from the account and return the new balance.
+
+        Args:
+            amount (float): The amount to withdraw.
+
+        Returns:
+            float: The updated balance.
+
+        Example:
+            >>> account = SimpleBankAccount(balance=100)
+            >>> account.withdraw(40)
+            60
+            >>> account.withdraw(20)
+            40
+        """
         if amount <= 0:
             raise ValueError("Amount must be greater than zero")
 
@@ -61,4 +111,15 @@ class SimpleBankAccount(BankAccount):
 
     @property
     def balance(self) -> float:
+        """
+        Retrieve the current balance of the account.
+
+        Returns:
+            float: The current balance.
+
+        Example:
+            >>> account = SimpleBankAccount(balance=200)
+            >>> account.balance
+            200
+        """
         return self._balance
