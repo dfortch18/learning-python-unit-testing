@@ -1,4 +1,4 @@
 requests==2.32.3
 pytest==8.3.4
-Faker==33.3.1
+Faker==35.2.0
 email_validator==2.2.0
